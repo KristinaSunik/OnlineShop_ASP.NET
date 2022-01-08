@@ -1,0 +1,68 @@
+﻿@model List<ProductViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="row">
+    <div class="col-lg-3 my-4">
+        <h5 class="my-4">Категории</h5>
+        <div class="btn-group-vertical text-center my-2">
+            <a class="btn btn-toolbar" role="button" asp-area="" asp-controller="Home" asp-action="Index" asp-route-filter=@ProductCategory.Domestic>Домашние</a>
+            <a class="btn btn-toolbar" role="button" asp-area="" asp-controller="Home" asp-action="Index" asp-route-filter=@ProductCategory.Wild>Дикие</a>
+            <a class="btn btn-toolbar" role="button" asp-area="" asp-controller="Home" asp-action="Index" asp-route-filter=@ProductCategory.Exotic>Экзотические</a>
+            <a class="btn btn-toolbar" role="button" asp-area="" asp-controller="Home" asp-action="Index" asp-route-filter=@ProductCategory.Goods>Товары</a>
+            <a class="btn btn-toolbar" role="button" asp-area="" asp-controller="Home" asp-action="Index">Все</a>
+        </div>
+    </div>
+    <div class="col-lg-9 my-4">
+        <form asp-area="" asp-controller="Home" asp-action="Index">
+            <p>
+                <input type="text" name="filter" />
+                <input type="submit" value="Найти" />
+            </p>
+        </form>
+        @if (Model != null && Model.Count != 0)
+        {
+            <div class="row my-4">
+                @foreach (var product in Model)
+                {
+                    <div class="col-3 card shadow">
+
+                        <img class="card-img-top" src=@product.ImagePath alt="Изображение товара" />
+
+                        <div class="card-body">
+                            <a asp-area="" asp-controller="product" asp-action="index" asp-route-productId="@product.Id">
+                                <h5 style="color:navy">@product.Name</h5>
+                            </a>
+                            <h5 style="color:gray"> @product.Cost руб</h5>
+                            @if (product.IsInBasket)
+                            {
+                                <a class="btn btn-outline-dark my-1" type="button" asp-area="" asp-controller="basket" asp-action="add" asp-route-productId="@product.Id" role="button">В корзине</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-dark my-1" type="button" asp-area="" asp-controller="basket" asp-action="add" asp-route-productId="@product.Id" role="button">В корзину</a>
+                            }
+
+                            @if (product.IsFavorite)
+                            {
+                                <a class="btn btn-outline-dark my-1" asp-area="" asp-controller="favorite" asp-action="add" asp-route-productId="@product.Id" role="button">В избранном</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-secondary my-1" asp-area="" asp-controller="favorite" asp-action="add" asp-route-productId="@product.Id" role="button">В избранное</a>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <h5>Нет товаров пока</h5>
+        }
+    </div>
+</div>
+

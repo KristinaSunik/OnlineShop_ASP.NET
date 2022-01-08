@@ -1,0 +1,48 @@
+﻿@model UserViewModel
+
+<div class="row">
+
+    @await Html.PartialAsync("LeftPanel")
+
+    <div class="row-9">
+        <h4>Пользователь @Model.Login</h4>
+        <div class="col-9">
+            <table class="table">
+                <tr>
+                    <td> Имя: </td>
+                    <td> @Model.FirstName</td>
+                </tr>
+                <tr>
+                    <td> Фамилия: </td>
+                    <td> @Model.LastName</td>
+                </tr>
+                <tr>
+                    <td> Телефон: </td>
+                    <td> @Model.PhoneNumber</td>
+                </tr>
+                <tr>
+                    <td> Адрес: </td>
+                    <td> @Model.Adress</td>
+                </tr>
+                <tr>
+                    <td> Логин: </td>
+                    <td> @Model.Login</td>
+                </tr>
+                <tr>
+                    <td>Пароль: </td>
+                    <td>@Model.Password</td>
+                </tr>
+            </table>
+        </div>
+        <br />
+
+        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" area-haspopup="true" area-expanded="false">Действия</button>
+        <div class="dropdown-menu" area-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangePassword" asp-route-userId="@Model.Id">Смена пароля</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-userId="@Model.Id">Редактирование данных</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ChangeRights" asp-route-userId="@Model.Id">Права доступа</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Delete" asp-route-userId="@Model.Id">Удалить пользователя</a>
+        </div>
+
+    </div>
+</div>
