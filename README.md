@@ -1,2 +1,6 @@
-# ASP.NET_Core_2.0
-Второй поток курса "WEB программирование на ASP.NET Core"
+# ASP.NET_Core
+# MVC
+# Entity Framework - SQL - Migrations
+# LINQ
+# Logging
+
