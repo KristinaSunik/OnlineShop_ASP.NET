@@ -1,0 +1,46 @@
+﻿@model Register
+@{
+    ViewData["Title"] = "Registration Page";
+}
+
+<div class="row">
+    <div class="col-3 my-4"></div>
+    <div class="col-6 my-4">
+        <div class="card justify-content-md-center shadow">
+            <div class="card-body col- justify-content-md-center">
+                <form class="text-sm-center" method="post">
+                    <h3 class="my-3 text-center">Регистрация</h3>
+                    <div class="validation" asp-validation-summary="All">
+
+                        <div class="row mx-auto" style="width: 400px;">
+                            <div class="col-10">
+                                <input class="form-control my-3" asp-for="Login" placeholder="Логин(e-mail)">
+                                <span asp-validation-for="Login"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mx-auto" style="width: 400px;">
+                            <div class="col-10">
+                                <input type="password" class="form-control my-2" asp-for="Password" placeholder="Пароль">
+                                <span asp-validation-for="Password"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mx-auto" style="width: 400px;">
+                            <div class="col-10">
+                                <input type="password" class="form-control my-2" asp-for="PasswordConfirm" placeholder="Подтвердите пароль">
+                                <span asp-validation-for="PasswordConfirm"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="text-center">
+                        <a class="btn btn-outline-dark my-3" type="button" asp-controller="Home" asp-action="Index" role="button" aria-label="BackToHomePage">Отмена</a>
+                        <button class="btn btn-dark my-3" type="submit" asp-controller="Account" asp-action="Register" aria-label="Registration">Регистрация</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 my-4"></div>
+</div>

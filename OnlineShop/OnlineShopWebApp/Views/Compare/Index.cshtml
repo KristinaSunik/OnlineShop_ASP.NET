@@ -1,0 +1,72 @@
+﻿@model CompareViewModel
+@{
+    ViewData["Title"] = "Compare Page";
+}
+
+@if (Model != null && Model.Items.Count != 0)
+{
+    Guid userId = Model.UserId;
+    int counter = 1;
+    <h3 class="text-center my-4">Сравнение товаров</h3>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Товар</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Описание</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model.Items)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">@counter</th>
+                    <td>
+                        <a style="color:black" asp-area="" asp-controller="product" asp-action="index" asp-route-productId="@item.Id">
+                            <h5>@item.Name</h5>
+                        </a>
+                    </td>
+                    <td>@item.Cost</td>
+                    <td>@item.Description</td>
+
+                    <td>
+                        <div class="text-center">
+                            @if (item.IsFavorite)
+                            {
+                                <a class="btn btn-outline-dark" asp-area="" asp-controller="favorite" asp-action="add" asp-route-productId="@item.Id" role="button" aria-label="RemoveFromFavorite">В избранном</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-secondary" asp-area="" asp-controller="favorite" asp-action="add" asp-route-productId="@item.Id" role="button" aria-label="AddToFavorite">В избранное</a>
+                            }
+                            <a class="btn btn-outline-secondary" asp-area="" asp-controller="compare" asp-action="remove" asp-route-productId="@item.Id" role="button" aria-label="Delete">Удалить</a>
+
+                            @if (item.IsInBasket)
+                            {
+                                <a class="btn btn-outline-dark" type="button" asp-area="" asp-controller="basket" asp-action="add" asp-route-productId="@item.Id" role="button">В корзине</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-dark" type="button" asp-area="" asp-controller="basket" asp-action="add" asp-route-productId="@item.Id" role="button">В корзину</a>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            counter++;
+        }
+    </table>
+
+    <div class="text-center">
+        <a class="btn btn-outline-dark" asp-area="" asp-controller="home" asp-action="index" role="button" aria-label="BackToHomePage">Продолжить покупки</a>
+        <a class="btn btn-dark" asp-area="" asp-controller="basket" asp-action="index" role="button" aria-label="GoToBasket">Перейти в корзину </a>
+    </div>
+}
+else
+{
+    <h5> Нет товаров для сравнения...</h5>
+}
+

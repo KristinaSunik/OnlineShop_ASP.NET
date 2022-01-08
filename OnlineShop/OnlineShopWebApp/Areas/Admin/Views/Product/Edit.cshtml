@@ -1,0 +1,56 @@
+﻿@model ProductViewModel
+
+@{
+    ViewData["Title"] = "Product Edit Page";
+}
+
+<div class="row">
+    @await Html.PartialAsync("LeftPanel")
+
+    <div class="row-9">
+        <form class="text-sm-center" method="post">
+            <h4>Редактирование продукта</h4>
+            <div class="validation" asp-validation-summary="All">
+                <div class="card mb-auto shadow">
+                    <div class="row g-0">
+                        <div class="col-md-3">
+                            <img class="card-img-top rounded-start" src=@Model.ImagePath alt="Изображение товара" />
+                            <a class="btn btn-outline-dark" href="#" role="button">Загрузить новое изображение</a>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <input type="hidden" name="Id" value="@Model.Id" />
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" asp-validation-for="Name">Имя</span>
+                                    <input type="text" class="form-control" asp-for="Name" value="@Model.Name" aria-label="name">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" asp-validation-for="Description">Описание</span>
+                                    <input type="text" class="form-control" asp-for="Description" value="@Model.Description" aria-label="description">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" asp-validation-for="Cost">Стоимость</span>
+                                    <input type="number" class="form-control" asp-for="Cost" value="@Model.Cost" aria-label="cost">
+                                </div>
+
+                                <div>
+                                    <span class="input-group-text">Категория товара</span>
+                                    <select asp-for="Category"
+                                            asp-items="@Html.GetEnumSelectList<ProductCategory>()"
+                                            class="form-control">
+                                    </select>
+
+                                </div>
+
+                                <button class="btn btn-dark my-3" type="submit" role="button" asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-productId="@Model.Id">Сохранить изменения</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

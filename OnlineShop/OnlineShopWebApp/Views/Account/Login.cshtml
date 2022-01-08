@@ -1,0 +1,51 @@
+﻿@model Login
+@{
+    ViewData["Title"] = "Authorization Page";
+}
+
+<div class="row">
+    <div class="col-4 my-4"></div>
+    <div class="col-4 my-4">
+        <div class="card justify-content-md-center shadow">
+            <div class="card-body col- justify-content-md-center">
+                <form class="text-sm-center" method="post">
+                    <h3 class="my-3 text-center">Вход</h3>
+                    <div class="validation" asp-validation-summary="All">
+
+                        <input type="hidden"  asp-for="ReturnURL" value="@Model.ReturnURL"/>
+
+                        <div class="row mx-auto" style="width: 400px;">
+                            <div class="col-10 my-2 ">
+                                <input class="form-control" asp-for="UserName" placeholder="Логин(e-mail)" />
+                                <span asp-validation-for="UserName"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mx-auto" style="width: 400px;">
+                            <div class="col-10 my-2 ">
+                                <input type="password" class="form-control" asp-for="Password" placeholder="Пароль" />
+                                <span asp-validation-for="Password"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-check my-2 ">
+                            <input class="form-check-input" type="checkbox" asp-for="Remember" value="True" checked>
+                            <label class="form-check-label">
+                                Запомнить меня
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <a class="btn btn-outline-dark" type="button" asp-area="" asp-controller="Home" asp-action="Index" role="button" aria-label="BackToHomePage">Отмена</a>
+                        <button class="btn btn-dark" type="submit" asp-area="" asp-controller="Account" asp-action="Login" aria-label="Authorisation">Войти</button>
+                        <a class="btn btn-outline-dark" role="button" asp-area="" asp-controller="Account" asp-action="Register" aria-label="Registration">Регистрация</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 my-4"></div>
+</div>
+
+

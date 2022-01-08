@@ -1,0 +1,51 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Create Product Page";
+}
+
+<div class="row">
+
+    @await Html.PartialAsync("LeftPanel")
+    <div class="row-9">
+        <form class="text-sm-center" method="post">
+            <h4>Создание нового продукта</h4>
+            <div class="validation" asp-validation-summary="All">
+                <div class="card mb-auto shadow">
+                    <div class="row g-0">
+                        <div class="col-md-3">
+                            <a class="btn btn-outline-dark" href="#" role="button">Загрузить изображение товара</a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <div class="input-group row-6">
+                                    <span class="input-group-text" asp-validation-for="Name">Имя</span>
+                                    <input type="text" class="form-control" asp-for="Name" aria-label="name">
+                                </div>
+
+                                <div class="input-group">
+                                    <span class="input-group-text" asp-validation-for="Description">Описание</span>
+                                    <input type="text" class="form-control" asp-for="Description" aria-label="description">
+                                </div>
+
+                                <div class="input-group">
+                                    <span class="input-group-text" asp-validation-for="Cost">Стоимость</span>
+                                    <input type="number" class="form-control" asp-for="Cost" aria-label="cost">
+                                </div>
+
+                                <div>
+                                    <h5>Категория товара : </h5>
+                                    <select asp-for="Category"
+                                            asp-items="@Html.GetEnumSelectList<ProductCategory>()"
+                                            class="form-control">
+                                    </select>
+                                </div>
+
+                                <button class="btn btn-dark" type="submit" asp-area="Admin" asp-controller="Product" asp-action="New">Добавить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
